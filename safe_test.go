@@ -45,24 +45,33 @@ func TestDo(t *testing.T) {
 		})
 	)
 
-	if err := errThrowFunc(); err != errThrow {
-		t.Error(err)
-		t.Errorf("got: '%v', want: '%v'", err, errThrow)
-	}
+	t.Run("case=throw-error", func(t *testing.T) {
+		if err := errThrowFunc(); err != errThrow {
+			t.Errorf("got: '%v', want: '%v'", err, errThrow)
+		}
+	})
 
-	if err := errPanicFunc(); err != errPanic {
-		t.Errorf("got: '%v', want: '%v'", err, errPanic)
-	}
+	t.Run("case=panic-error", func(t *testing.T) {
+		if err := errPanicFunc(); err != errPanic {
+			t.Errorf("got: '%v', want: '%v'", err, errPanic)
+		}
+	})
 
-	if err := errCustomFunc(); err != errCustom {
-		t.Errorf("got: '%v', want: '%v'", err, errCustom)
-	}
+	t.Run("case=custom-error", func(t *testing.T) {
+		if err := errCustomFunc(); err != errCustom {
+			t.Errorf("got: '%v', want: '%v'", err, errCustom)
+		}
+	})
 
-	if err := errStringFunc(); err.Error() != errString.Error() {
-		t.Errorf("got '%v', want '%v'", err.Error(), errString.Error())
-	}
+	t.Run("case=string-error", func(t *testing.T) {
+		if err := errStringFunc(); err.Error() != errString.Error() {
+			t.Errorf("got '%v', want '%v'", err.Error(), errString.Error())
+		}
+	})
 
-	if err := throwDataFunc(); err.Error() != errThrowData.Error() {
-		t.Errorf("got: '%#v', want: '%#v'", err.Error(), errThrowData.Error())
-	}
+	t.Run("case=throw-data", func(t *testing.T) {
+		if err := throwDataFunc(); err.Error() != errThrowData.Error() {
+			t.Errorf("got: '%#v', want: '%#v'", err.Error(), errThrowData.Error())
+		}
+	})
 }

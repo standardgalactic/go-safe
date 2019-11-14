@@ -1,5 +1,7 @@
 # go-safe
 
+[![test](https://github.com/kenkyu392/go-safe/workflows/test/badge.svg?branch=master)](https://github.com/kenkyu392/go-safe)
+[![codecov](https://codecov.io/gh/kenkyu392/go-safe/branch/master/graph/badge.svg)](https://codecov.io/gh/kenkyu392/go-safe)
 [![GoDoc](https://godoc.org/github.com/kenkyu392/go-safe?status.svg)](https://godoc.org/github.com/kenkyu392/go-safe)
 [![Go Report Card](https://goreportcard.com/badge/github.com/kenkyu392/go-safe)](https://goreportcard.com/report/github.com/kenkyu392/go-safe)
 
