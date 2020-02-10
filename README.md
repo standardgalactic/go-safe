@@ -5,7 +5,7 @@
 [![GoDoc](https://godoc.org/github.com/kenkyu392/go-safe?status.svg)](https://godoc.org/github.com/kenkyu392/go-safe)
 [![Go Report Card](https://goreportcard.com/badge/github.com/kenkyu392/go-safe)](https://goreportcard.com/report/github.com/kenkyu392/go-safe)
 
-Provides functionality to help you execute methods safely.
+Provides a sandbox where functions can be executed panically safe.
 
 ## Installation
 
