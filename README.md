@@ -2,8 +2,9 @@
 
 [![test](https://github.com/kenkyu392/go-safe/workflows/test/badge.svg?branch=master)](https://github.com/kenkyu392/go-safe)
 [![codecov](https://codecov.io/gh/kenkyu392/go-safe/branch/master/graph/badge.svg)](https://codecov.io/gh/kenkyu392/go-safe)
-[![GoDoc](https://godoc.org/github.com/kenkyu392/go-safe?status.svg)](https://godoc.org/github.com/kenkyu392/go-safe)
-[![Go Report Card](https://goreportcard.com/badge/github.com/kenkyu392/go-safe)](https://goreportcard.com/report/github.com/kenkyu392/go-safe)
+[![go.dev reference](https://img.shields.io/badge/go.dev-reference-00ADD8?logo=go)](https://pkg.go.dev/github.com/kenkyu392/go-safe)
+[![go report card](https://goreportcard.com/badge/github.com/kenkyu392/go-safe)](https://goreportcard.com/report/github.com/kenkyu392/go-safe)
+[![license](https://img.shields.io/github/license/kenkyu392/go-safe)](LICENSE)
 
 Provides a sandbox where functions can be executed panically safe.
 
@@ -37,4 +38,4 @@ func main() {
 
 ## License
 
-[MIT](https://github.com/kenkyu392/go-safe/blob/master/LICENSE)
+[MIT](LICENSE)
