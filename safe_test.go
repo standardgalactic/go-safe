@@ -20,58 +20,68 @@ type throwData struct {
 
 func TestDo(t *testing.T) {
 	var (
-		errThrow     = errors.New("throw error")
-		errPanic     = errors.New("panic error")
-		errString    = errors.New("string error")
-		errCustom    = &customError{msg: "custom error"}
-		data         = &throwData{value: "message"}
-		errThrowData = fmt.Errorf("%#v", data)
+		errReturn      = errors.New("return error")
+		errPanic       = errors.New("panic error")
+		errPanicString = errors.New("panic string error")
+		errPanicCustom = &customError{msg: "panic custom error"}
+		errPanicStruct = fmt.Errorf("%#v", &throwData{value: "message"})
 	)
-	var (
-		errThrowFunc = Func(func() error {
-			return errThrow
+	testCases := []struct {
+		name  string
+		fn    func() error
+		equal func(got error) bool
+	}{
+		{
+			name: "ReturnError",
+			fn: func() error {
+				return errReturn
+			},
+			equal: func(got error) bool {
+				return errors.Is(got, errReturn)
+			},
+		},
+		{
+			name: "PanicError",
+			fn: func() error {
+				panic(errPanic)
+			},
+			equal: func(got error) bool {
+				return errors.Is(got, errPanic)
+			},
+		},
+		{
+			name: "PanicCustomError",
+			fn: func() error {
+				panic(errPanicCustom)
+			},
+			equal: func(got error) bool {
+				return errors.Is(got, errPanicCustom)
+			},
+		},
+		{
+			name: "PanicString",
+			fn: func() error {
+				panic(errPanicString.Error())
+			},
+			equal: func(got error) bool {
+				return got.Error() == errPanicString.Error()
+			},
+		},
+		{
+			name: "PanicStruct",
+			fn: func() error {
+				panic(&throwData{value: "message"})
+			},
+			equal: func(got error) bool {
+				return got.Error() == errPanicStruct.Error()
+			},
+		},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if err := Func(tc.fn)(); !tc.equal(err) {
+				t.Error("the error must match")
+			}
 		})
-		errPanicFunc = Func(func() error {
-			panic(errPanic)
-		})
-		errCustomFunc = Func(func() error {
-			panic(errCustom)
-		})
-		errStringFunc = Func(func() error {
-			panic(errString.Error())
-		})
-		throwDataFunc = Func(func() error {
-			panic(data)
-		})
-	)
-
-	t.Run("case=throw-error", func(t *testing.T) {
-		if err := errThrowFunc(); err != errThrow {
-			t.Errorf("got: '%v', want: '%v'", err, errThrow)
-		}
-	})
-
-	t.Run("case=panic-error", func(t *testing.T) {
-		if err := errPanicFunc(); err != errPanic {
-			t.Errorf("got: '%v', want: '%v'", err, errPanic)
-		}
-	})
-
-	t.Run("case=custom-error", func(t *testing.T) {
-		if err := errCustomFunc(); err != errCustom {
-			t.Errorf("got: '%v', want: '%v'", err, errCustom)
-		}
-	})
-
-	t.Run("case=string-error", func(t *testing.T) {
-		if err := errStringFunc(); err.Error() != errString.Error() {
-			t.Errorf("got '%v', want '%v'", err.Error(), errString.Error())
-		}
-	})
-
-	t.Run("case=throw-data", func(t *testing.T) {
-		if err := throwDataFunc(); err.Error() != errThrowData.Error() {
-			t.Errorf("got: '%#v', want: '%#v'", err.Error(), errThrowData.Error())
-		}
-	})
+	}
 }
