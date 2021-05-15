@@ -30,9 +30,38 @@ import (
 func main() {
 	// The panic that occurs in the function is automatically handled as an error.
 	if err := safe.Do(func() error {
-		// Do something...
+		// Something that might cause a panic...
 		return nil
 	}); err != nil {
+		log.Fatal(err)
+	}
+}
+```
+
+The sandbox function can be used in combination with sync/errgroup.
+
+```go
+package main
+
+import (
+	"log"
+
+	"github.com/kenkyu392/go-safe"
+	"golang.org/x/sync/errgroup"
+)
+
+func main() {
+	// Create a sandboxed function.
+	fn := safe.Func(func() error {
+		// Something that might cause a panic...
+		return nil
+	})
+
+	eg := new(errgroup.Group)
+	for i := 0; i < 10; i++ {
+		eg.Go(fn)
+	}
+	if err := eg.Wait(); err != nil {
 		log.Fatal(err)
 	}
 }
