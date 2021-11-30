@@ -1,10 +1,11 @@
 # go-safe
 
-[![test](https://github.com/kenkyu392/go-safe/workflows/test/badge.svg?branch=master)](https://github.com/kenkyu392/go-safe)
-[![codecov](https://codecov.io/gh/kenkyu392/go-safe/branch/master/graph/badge.svg)](https://codecov.io/gh/kenkyu392/go-safe)
+[![test](https://github.com/kenkyu392/go-safe/workflows/test/badge.svg?branch=main)](https://github.com/kenkyu392/go-safe)
+[![codecov](https://codecov.io/gh/kenkyu392/go-safe/branch/main/graph/badge.svg)](https://codecov.io/gh/kenkyu392/go-safe)
 [![go.dev reference](https://img.shields.io/badge/go.dev-reference-00ADD8?logo=go)](https://pkg.go.dev/github.com/kenkyu392/go-safe)
 [![go report card](https://goreportcard.com/badge/github.com/kenkyu392/go-safe)](https://goreportcard.com/report/github.com/kenkyu392/go-safe)
 [![license](https://img.shields.io/github/license/kenkyu392/go-safe)](LICENSE)
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go)
 
 This Go package provides a sandbox for the safe execution of panic-inducing programs.
 
